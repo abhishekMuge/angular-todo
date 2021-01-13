@@ -26,4 +26,11 @@ export class TodoListComponent implements OnInit {
       (error) => (this.errorMsg = error)
     );
   }
+
+  deleteTodo(todo: ITodo) {
+    this._todoService.deleteTodo(todo.id).subscribe((data) => {
+      const newTodos = this.todos.filter((todoItem) => todoItem.id !== data.id);
+      this.todos = newTodos;
+    });
+  }
 }
